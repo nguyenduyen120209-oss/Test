@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MindQuest 20 — Khám phá năng lực</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#182033;--muted:#697386;--line:#e6e9f0;--accent:#6c63ff;--accent2:#00b8a9;--good:#18a66a;--warn:#ff9f43;--shadow:0 18px 55px rgba(27,35,60,.10)}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(145deg,#f7f8ff,#f2fbfa);color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+button{font:inherit} .app{max-width:1050px;margin:auto;padding:22px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+.brand{font-weight:900;letter-spacing:-.03em;font-size:20px}.brand span{color:var(--accent)}
+.badge{font-size:12px;color:#5b6475;background:#fff;border:1px solid var(--line);padding:8px 11px;border-radius:999px}
+.progress{height:8px;background:#e9ecf4;border-radius:99px;overflow:hidden}.bar{height:100%;width:5%;background:linear-gradient(90deg,var(--accent),#9c7cff);transition:width .35s ease}
+.card{background:rgba(255,255,255,.94);border:1px solid rgba(230,233,240,.9);border-radius:28px;box-shadow:var(--shadow);padding:30px;margin-top:18px}
+.center{text-align:center}.intro h1{font-size:clamp(32px,6vw,58px);line-height:1;margin:15px 0 14px;letter-spacing:-.055em}.intro p{max-width:690px;margin:0 auto;color:var(--muted);font-size:16px;line-height:1.7}
+.cta{margin-top:24px;background:var(--ink);color:#fff;border:0;border-radius:15px;padding:14px 20px;cursor:pointer;font-weight:800;box-shadow:0 10px 25px rgba(24,32,51,.16)}.cta:hover{transform:translateY(-1px)}
+.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:8px}.qtitle{font-size:26px;line-height:1.25;margin:8px 0 10px}.hint{color:var(--muted);line-height:1.6;margin-bottom:18px}
+.visual{display:flex;justify-content:center;align-items:center;min-height:190px;background:#f8f9fd;border:1px solid var(--line);border-radius:20px;margin:18px 0;padding:18px;overflow:hidden}
+.visual svg{max-width:100%;height:auto}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.choice{border:1.5px solid var(--line);background:#fff;border-radius:15px;padding:14px;text-align:left;cursor:pointer;transition:.18s;min-height:58px;color:var(--ink)}.choice:hover{border-color:#b7b0ff;background:#fbfaff;transform:translateY(-1px)}.choice.selected{border-color:var(--accent);background:#f1efff}.choice strong{display:inline-grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#eef0f7;margin-right:8px;font-size:12px}
+.timer{font-weight:900;color:var(--warn);font-variant-numeric:tabular-nums}.audio{display:flex;justify-content:center;gap:10px;margin:12px 0}.audio button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 15px;cursor:pointer}.footer{display:flex;justify-content:space-between;align-items:center;margin-top:18px;color:var(--muted);font-size:12px}
+.hidden{display:none!important}.fade{animation:fade .28s ease}@keyframes fade{from{opacity:.25;transform:translateY(8px)}to{opacity:1;transform:none}}
+.result h1{font-size:38px;letter-spacing:-.04em;margin:0 0 8px}.result .sub{color:var(--muted);line-height:1.6}.hero{background:linear-gradient(135deg,#eeedff,#e8fbf8);border-radius:22px;padding:24px;margin:20px 0}.hero h2{margin:0 0 7px;font-size:25px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{border:1px solid var(--line);border-radius:20px;padding:20px;background:#fff}.panel h3{margin:0 0 15px}.bars{display:grid;gap:12px}.row{display:grid;grid-template-columns:130px 1fr 40px;gap:9px;align-items:center;font-size:13px}.track{height:10px;background:#edf0f5;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--accent),#9b84ff);border-radius:99px;transition:width 1s ease}.top3{display:grid;gap:10px}.rank{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:#f7f8fc}.num{width:32px;height:32px;border-radius:10px;background:#ece9ff;display:grid;place-items:center;font-weight:900}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{padding:8px 10px;background:#effaf7;color:#157a69;border-radius:999px;font-size:12px}.history{margin-top:16px}.history-item{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.secondary{border:1px solid var(--line);background:#fff;border-radius:14px;padding:12px 15px;cursor:pointer;font-weight:750}.notice{font-size:12px;color:#747d8f;background:#f7f8fb;padding:12px 14px;border-radius:14px;line-height:1.55;margin-top:16px}
+@media(max-width:700px){.app{padding:12px}.card{padding:20px;border-radius:22px}.choices,.grid{grid-template-columns:1fr}.row{grid-template-columns:105px 1fr 34px}.qtitle{font-size:22px}.visual{min-height:160px}.top{margin-bottom:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><div class="brand">Mind<span>Quest</span> 20</div><div class="badge">Khám phá bản thân · không chuẩn hóa</div></div>
+  <div class="progress"><div id="bar" class="bar"></div></div>
+
+  <section id="intro" class="card intro center">
+    <div style="font-size:48px">🧠 ✨ 🎧</div>
+    <h1>20 câu để khám phá<br>cách bạn <span style="color:var(--accent)">tư duy & cảm nhận</span></h1>
+    <p>Một trải nghiệm ngắn kết hợp logic, quan sát, ghi nhớ, ngôn ngữ, sáng tạo, giao tiếp và xử lý tình huống. Bạn sẽ không biết câu hỏi thuộc nhóm nào cho đến khi hoàn thành.</p>
+    <button class="cta" onclick="start()">Bắt đầu khám phá →</button>
+    <div class="notice">Lưu ý: đây là công cụ khám phá & giải trí, không phải bài đo IQ/EQ chuẩn hóa, không dùng để chẩn đoán hay kết luận năng lực tâm lý.</div>
+  </section>
+
+  <section id="quiz" class="card hidden"></section>
+  <section id="result" class="card result hidden"></section>
+</div>
+
+<script>
+const questions=[
+{id:1,type:"logic",title:"Một robot di chuyển theo quy luật. Ô tiếp theo là ô nào?",visual:"grid",options:["A","B","C","D"],correct:2,tags:{logic:3,planning:1,problem:1},timed:20},
+{id:2,type:"memory",title:"Hãy ghi nhớ chuỗi âm thanh, sau đó chọn đúng thứ tự.",visual:"audioSeq",options:["Cao – Thấp – Cao – Trung","Trung – Cao – Thấp – Cao","Cao – Trung – Thấp – Cao","Thấp – Cao – Trung – Cao"],correct:2,tags:{memory:4,observation:1}},
+{id:3,type:"pattern",title:"Hình nào hoàn tất quy luật xoay?",visual:"rotate",options:["↗","↘","↙","↖"],correct:1,tags:{logic:3,observation:2}},
+{id:4,type:"eq",title:"Bạn nhận được tin nhắn: “Ừ, tùy bạn.” Sau đó người kia im lặng. Cách phản hồi nào thể hiện khả năng đọc tình huống tốt nhất?",options:["“OK.”","Hỏi nhẹ: “Mình cảm giác bạn hơi không vui, có muốn nói thêm không?”","Không trả lời nữa.","Gửi thật nhiều tin nhắn để hỏi cho ra."],correct:1,tags:{eq:4,communication:3,problem:1}},
+{id:5,type:"visual",title:"Có một biểu tượng khác nhóm. Hãy tìm vị trí khác biệt.",visual:"odd",options:["1","2","3","4"],correct:3,tags:{observation:4,logic:1},timed:15},
+{id:6,type:"language",title:"Chọn từ có quan hệ gần nhất với cặp: “Bản đồ : Định hướng”.",options:["Công thức : Tính toán","Câu chuyện : Màu sắc","Âm nhạc : Cái bàn","Bút : Cơn mưa"],correct:0,tags:{language:3,logic:2}},
+{id:7,type:"planning",title:"Bạn có 45 phút, 3 việc: gửi email quan trọng (10’), mua thuốc (15’), hoàn thiện slide (25’). Cửa hàng đóng sau 30 phút. Bạn làm gì trước?",options:["Slide → email → mua thuốc","Email → slide → mua thuốc","Mua thuốc → email → slide","Mua thuốc → slide → email"],correct:2,tags:{planning:4,problem:3}},
+{id:8,type:"eq",title:"Một đồng đội mắc lỗi khiến cả nhóm phải làm lại. Cách xử lý nào vừa hiệu quả vừa giữ quan hệ?",options:["Phê bình trước cả nhóm.","Bỏ qua hoàn toàn.","Trao đổi riêng, tập trung vào cách sửa và thống nhất bước phòng ngừa.","Nhờ người khác chịu trách nhiệm."],correct:2,tags:{eq:4,communication:3,problem:2}},
+{id:9,type:"creative",title:"Nếu một chiếc ô có thể làm thêm một việc ngoài che mưa, ý tưởng nào thể hiện tư duy mở nhất?",options:["Có thêm cán dài hơn.","Biến thành đèn phát sáng khi trời tối.","Làm nó nhẹ hơn.","Thêm một màu mới."],correct:1,tags:{creative:4,problem:2}},
+{id:10,type:"memory",title:"Nghe mẫu âm thanh rồi chọn mẫu có cùng thứ tự.",visual:"audioSeq2",options:["1 – 2 – 3 – 1","2 – 3 – 1 – 2","3 – 1 – 2 – 3","1 – 3 – 2 – 1"],correct:2,tags:{memory:4,observation:1}},
+{id:11,type:"visual",title:"Khuôn mặt nào thể hiện cảm xúc gần nhất với “ngạc nhiên tích cực”?",visual:"faces",options:["A","B","C","D"],correct:1,tags:{eq:3,observation:3,communication:1}},
+{id:12,type:"logic",title:"Dãy số: 2, 6, 12, 20, 30, ? Số tiếp theo là:",options:["36","40","42","44"],correct:2,tags:{logic:4,planning:1}},
+{id:13,type:"problem",title:"Wi‑Fi nhà bạn mất đúng lúc cần họp online. Bạn có 5 phút. Hành động đầu tiên hợp lý nhất?",options:["Khởi động lại mọi thiết bị cùng lúc.","Kiểm tra xem lỗi là ở thiết bị hay mạng bằng cách thử một thiết bị khác.","Gọi ngay cho nhà mạng và chờ.","Bỏ cuộc, hủy họp."],correct:1,tags:{problem:4,logic:2}},
+{id:14,type:"language",title:"Chọn câu diễn đạt rõ nhất trong một email công việc.",options:["“Em gửi anh file này để anh xem giúp em ạ.”","“Em gửi anh file cập nhật. Nhờ anh xem và phản hồi trước 16h giúp em.”","“Anh xem file nhé.”","“File đây.”"],correct:1,tags:{language:3,communication:3,planning:1}},
+{id:15,type:"pattern",title:"Hình cuối cần thỏa cả quy luật hàng và cột. Chọn đáp án.",visual:"matrix",options:["○△","△□","□○","○□"],correct:3,tags:{logic:4,observation:2}},
+{id:16,type:"eq",title:"Bạn thấy một người bạn hôm nay ít nói hơn bình thường. Cách tiếp cận nào phù hợp nhất?",options:["Kết luận ngay rằng họ đang giận bạn.","Hỏi mở và cho họ quyền không chia sẻ nếu chưa sẵn sàng.","Ép họ kể để bạn giúp.","Kể chuyện của mình để họ quên."],correct:1,tags:{eq:4,communication:4}},
+{id:17,type:"creative",title:"Bạn phải tạo một sản phẩm hữu ích từ 3 thứ: dây chun, cốc giấy, kẹp giấy. Ý tưởng nào có tính kết hợp chức năng rõ nhất?",options:["Một chiếc “giá đỡ điện thoại” tạm thời.","Đổi màu cả ba vật.","Xếp chúng thành hình tam giác.","Đặt cả ba vào ngăn kéo."],correct:0,tags:{creative:4,problem:2}},
+{id:18,type:"observation",title:"Bạn bước vào một căn phòng: đồng hồ chỉ 9:10, cửa sổ mở, đèn tắt, bàn có cốc nước đầy. Chi tiết nào là thông tin có thể kiểm chứng trực tiếp nhất?",options:["Có người vừa rời phòng.","Phòng đang lạnh.","Cửa sổ đang mở.","Người trong phòng đang vội."],correct:2,tags:{observation:4,logic:1}},
+{id:19,type:"planning",title:"Bạn có một mục tiêu lớn nhưng dễ trì hoãn. Cách bắt đầu nào có tính lập kế hoạch tốt nhất?",options:["Chờ có động lực.","Đặt một bước nhỏ 10 phút, thời điểm cụ thể và tiêu chí hoàn thành.","Làm tất cả trong một ngày.","Chỉ đọc thêm về mục tiêu."],correct:1,tags:{planning:4,problem:3}},
+{id:20,type:"synthesis",title:"Bạn được giao một nhiệm vụ mới, yêu cầu chưa rõ và thời hạn gấp. Phản ứng nào cân bằng nhất?",options:["Làm ngay theo phỏng đoán.","Hỏi 2–3 câu để làm rõ đầu ra, ưu tiên và thời hạn rồi bắt đầu bản nháp.","Từ chối vì chưa đủ thông tin.","Chờ người giao tự giải thích thêm."],correct:1,tags:{problem:3,planning:3,communication:3,logic:1}}
+];
+
+const labels={logic:"Tư duy logic",eq:"EQ & cảm xúc",creative:"Sáng tạo",observation:"Quan sát",memory:"Ghi nhớ",language:"Ngôn ngữ",communication:"Giao tiếp",problem:"Giải quyết vấn đề",planning:"Lập kế hoạch"};
+let state={i:0,answers:[],scores:{},start:0,timer:null};
+const qEl=document.getElementById("quiz"), intro=document.getElementById("intro"), result=document.getElementById("result"), bar=document.getElementById("bar");
+
+function start(){intro.classList.add("hidden");result.classList.add("hidden");qEl.classList.remove("hidden");state={i:0,answers:[],scores:{},start:Date.now(),timer:null};render()}
+function esc(s){return s.replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
+function render(){
+ clearInterval(state.timer); const q=questions[state.i]; bar.style.width=((state.i+1)/20*100)+"%";
+ qEl.className="card fade";
+ let visual=q.visual?visualHTML(q.visual):"";
+ qEl.innerHTML=`<div class="meta"><span>Câu ${state.i+1}/20</span><span>${q.timed?'<span class="timer" id="timer">'+q.timed+'s</span>':''}</span></div>
+ <div class="qtitle">${q.title}</div><div class="hint">Chọn phương án phù hợp nhất với bạn.</div>${visual}
+ ${q.visual&&q.visual.startsWith("audio")?audioControls(q.visual):""}
+ <div class="choices">${q.options.map((o,n)=>`<button class="choice" onclick="answer(${n})"><strong>${String.fromCharCode(65+n)}</strong>${esc(o)}</button>`).join("")}</div>
+ <div class="footer"><span>Không có đáp án “đúng về con người” — hãy phản hồi theo bản thân.</span><span>⟶ tự chuyển câu</span></div>`;
+ if(q.timed){let t=q.timed;const el=document.getElementById("timer");state.timer=setInterval(()=>{t--;if(el)el.textContent=t+"s";if(t<=0){clearInterval(state.timer);answer(-1)}},1000)}
+}
+function answer(n){clearInterval(state.timer);const q=questions[state.i];state.answers.push(n);if(n===q.correct)Object.entries(q.tags).forEach(([k,v])=>state.scores[k]=(state.scores[k]||0)+v);state.i++;if(state.i<questions.length){setTimeout(render,160)}else setTimeout(showResult,220)}
+function visualHTML(type){
+ if(type==="grid")return `<div class="visual"><svg width="430" height="170" viewBox="0 0 430 170"><g stroke="#cfd4e1" stroke-width="2" fill="none">${[0,1,2,3,4].map(i=>`<rect x="${30+i*78}" y="42" width="58" height="58" rx="10"/>`).join("")}</g><path d="M55 70h25l-8-8m8 8-8 8M133 70h25v-22m78 22h25v22m78-22h25l-8-8m8 8-8 8" stroke="#6c63ff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="342" y="42" width="58" height="58" rx="10" fill="#ece9ff" stroke="#6c63ff" stroke-width="3"/><text x="371" y="78" text-anchor="middle" font-size="26" fill="#6c63ff">?</text></svg></div>`;
+ if(type==="rotate")return `<div class="visual"><svg width="360" height="180"><g transform="translate(180 90)"><path d="M0-62 L28-5 L0 12 L-28-5Z" fill="#6c63ff"/><circle cy="-8" r="8" fill="white"/></g><text x="180" y="30" text-anchor="middle" font-size="13" fill="#697386">Mỗi bước xoay 90°</text><text x="180" y="160" text-anchor="middle" font-size="28" fill="#697386">→ ?</text></svg></div>`;
+ if(type==="odd")return `<div class="visual"><svg width="430" height="145">${[0,1,2,3].map(i=>`<g transform="translate(${35+i*100} 22)"><circle cx="40" cy="48" r="35" fill="#ece9ff"/> <path d="M40 20L66 68H14Z" fill="none" stroke="#6c63ff" stroke-width="5" ${i===3?'stroke-dasharray="4 5"':''}/></g>`).join("")}</svg></div>`;
+ if(type==="matrix")return `<div class="visual"><svg width="390" height="210" viewBox="0 0 390 210"><g stroke="#cfd4e1" stroke-width="2" fill="white"><rect x="80" y="20" width="90" height="70" rx="10"/><rect x="190" y="20" width="90" height="70" rx="10"/><rect x="80" y="110" width="90" height="70" rx="10"/><rect x="190" y="110" width="90" height="70" rx="10"/></g><text x="125" y="65" text-anchor="middle" font-size="32">○</text><text x="235" y="65" text-anchor="middle" font-size="32">△</text><text x="125" y="155" text-anchor="middle" font-size="32">△</text><text x="235" y="155" text-anchor="middle" font-size="32">?</text></svg></div>`;
+ if(type==="faces")return `<div class="visual"><svg width="500" height="145">${["😐","😮","😊","😠"].map((x,i)=>`<text x="${75+i*115}" y="82" text-anchor="middle" font-size="62">${x}</text><text x="${75+i*115}" y="122" text-anchor="middle" font-size="13" fill="#697386">${String.fromCharCode(65+i)}</text>`).join("")}</svg></div>`;
+ return "";
+}
+function audioControls(type){return `<div class="audio"><button onclick="playAudio('${type}')">▶ Phát âm thanh</button><button onclick="playAudio('${type}',true)">↻ Phát lại</button></div><div class="notice">Dùng loa hoặc tai nghe. Mẫu âm thanh không hiển thị bằng chữ để tránh gợi ý đáp án.</div>`}
+function playAudio(type,replay=false){
+ const C=window.AudioContext||window.webkitAudioContext; if(!C){alert("Trình duyệt không hỗ trợ Web Audio.");return} const ctx=new C(), seq=type==="audioSeq"?[660,440,660,520]:[520,660,440,520];
+ let t=ctx.currentTime+.05; seq.forEach((f,i)=>{let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=f;o.type="sine";g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+.28);o.connect(g).connect(ctx.destination);o.start(t);o.stop(t+.3);t+=.43});setTimeout(()=>ctx.close(),2400);
+}
+function calc(){
+ const max={logic:0,eq:0,creative:0,observation:0,memory:0,language:0,communication:0,problem:0,planning:0};
+ questions.forEach(q=>Object.entries(q.tags).forEach(([k,v])=>max[k]+=v));
+ return Object.fromEntries(Object.keys(max).map(k=>[k,Math.round(((state.scores[k]||0)/max[k])*100)]));
+}
+function domainMap(scores){
+ return [{n:"Toán học & Logic",v:(scores.logic+scores.problem)/2},{n:"Khoa học & Phân tích",v:(scores.logic+scores.observation+scores.problem)/3},{n:"Nghệ thuật & Sáng tạo",v:scores.creative},{n:"Ngôn ngữ",v:scores.language},{n:"Giao tiếp & Xã hội",v:(scores.eq+scores.communication)/2},{n:"Lãnh đạo",v:(scores.communication+scores.planning+scores.problem)/3},{n:"Quan sát",v:scores.observation},{n:"Giải quyết vấn đề",v:scores.problem},{n:"Lập kế hoạch",v:scores.planning}].sort((a,b)=>b.v-a.v);
+}
+function superpower(s){
+ const arr=Object.entries(s).sort((a,b)=>b[1]-a[1]);const k=arr[0][0];
+ return {logic:"Bộ não cấu trúc — bạn có xu hướng nhìn ra quan hệ, quy luật và cách sắp xếp.",eq:"Radar cảm xúc — bạn có xu hướng chú ý tín hiệu cảm xúc và cân nhắc tác động lên người khác.",creative:"Máy tạo ý tưởng — bạn có xu hướng mở rộng cách tiếp cận và kết nối những thứ quen thuộc theo cách mới.",observation:"Kính hiển vi đời thường — bạn có xu hướng phát hiện chi tiết và khác biệt mà người khác dễ bỏ qua.",memory:"Kho lưu trữ — bạn có xu hướng giữ và tái hiện thông tin theo trình tự.",language:"Người định hình ý — bạn có xu hướng diễn đạt ý tưởng rõ ràng và chọn từ có chủ đích.",communication:"Cầu nối — bạn có xu hướng điều chỉnh cách giao tiếp theo người và bối cảnh.",problem:"Người tháo nút — bạn có xu hướng chuyển vấn đề mơ hồ thành bước xử lý cụ thể.",planning:"Kiến trúc sư hành động — bạn có xu hướng ưu tiên, chia nhỏ và sắp xếp nguồn lực."}[k];
+}
+function saveHistory(scores,top){
+ let h=JSON.parse(localStorage.getItem("mindquest_history")||"[]");h.unshift({date:new Date().toLocaleString("vi-VN"),scores,top:top.slice(0,3).map(x=>x.n)});h=h.slice(0,8);localStorage.setItem("mindquest_history",JSON.stringify(h));return h;
+}
+function showResult(){
+ const s=calc(), domains=domainMap(s), h=saveHistory(s,domains);
+ const overall=Math.round(Object.values(s).reduce((a,b)=>a+b,0)/Object.keys(s).length);
+ result.classList.remove("hidden");qEl.classList.add("hidden");bar.style.width="100%";
+ result.innerHTML=`<div class="meta"><span>HOÀN TẤT · 20/20</span><span>${new Date().toLocaleDateString("vi-VN")}</span></div>
+ <h1>Hồ sơ năng lực của bạn</h1><div class="sub">Đây là bản đồ xu hướng dựa trên cách bạn trả lời bài khám phá này — không phải nhãn cố định hay phép đo IQ/EQ chuẩn hóa.</div>
+ <div class="hero"><h2>⚡ Siêu năng lực nổi bật</h2><div>${superpower(s)}</div><div class="chips" style="margin-top:14px">${domains.slice(0,3).map(x=>`<span class="chip">${esc(x.n)}</span>`).join("")}</div></div>
+ <div class="grid"><div class="panel"><h3>Biểu đồ năng lực</h3><div class="bars">${Object.entries(s).map(([k,v])=>`<div class="row"><span>${labels[k]}</span><div class="track"><div class="fill" style="width:${v}%"></div></div><b>${v}</b></div>`).join("")}</div></div>
+ <div class="panel"><h3>TOP 3 lĩnh vực nổi bật</h3><div class="top3">${domains.slice(0,3).map((x,i)=>`<div class="rank"><div class="num">${i+1}</div><div><b>${esc(x.n)}</b><div style="font-size:12px;color:var(--muted)">xu hướng nổi bật trong bài này</div></div></div>`).join("")}</div>
+ <h3 style="margin-top:20px">Gợi ý khám phá</h3><div class="sub">${suggestions(domains.slice(0,3))}</div></div></div>
+ <div class="panel history"><h3>So sánh các lần làm</h3>${h.map((x,i)=>`<div class="history-item"><span>${i===0?"Lần này":x.date}<br><small>${x.top.join(" · ")}</small></span><b>${Math.round(Object.values(x.scores).reduce((a,b)=>a+b,0)/Object.keys(x.scores).length)}/100</b></div>`).join("")}</div>
+ <div class="actions"><button class="cta" onclick="start()">↻ Làm lại</button><button class="secondary" onclick="clearHistory()">Xóa lịch sử trên thiết bị</button></div>
+ <div class="notice"><b>Diễn giải:</b> điểm cao hơn chỉ cho thấy bạn làm tốt hơn trong các dạng nhiệm vụ được chọn ở bài này. Kết quả chịu ảnh hưởng bởi ngữ cảnh, kinh nghiệm, tốc độ, thiết bị và cách hiểu câu hỏi.</div>`;
+ result.scrollIntoView({behavior:"smooth"});
+}
+function suggestions(top){
+ const m={"Toán học & Logic":"puzzle, cờ vua, lập trình, toán ứng dụng","Khoa học & Phân tích":"thí nghiệm nhỏ, phân tích dữ liệu, khoa học phổ thông","Nghệ thuật & Sáng tạo":"vẽ, viết ý tưởng, thiết kế, làm nhạc","Ngôn ngữ":"viết, ngoại ngữ, kể chuyện, tranh biện","Giao tiếp & Xã hội":"phỏng vấn, mentoring, hoạt động nhóm, lắng nghe chủ động","Lãnh đạo":"điều phối dự án nhỏ, tổ chức sự kiện, dẫn nhóm","Quan sát":"nhiếp ảnh, sketching, trò tìm điểm khác biệt","Giải quyết vấn đề":"case study, escape room, sửa lỗi hệ thống","Lập kế hoạch":"quản lý dự án cá nhân, time-boxing, lập lịch tuần"};
+ return top.map(x=>`<b>${esc(x.n)}</b>: thử ${m[x.n]||"các hoạt động thực hành tương ứng"}.`).join("<br>");
+}
+function clearHistory(){localStorage.removeItem("mindquest_history");alert("Đã xóa lịch sử trên thiết bị.");showResult()}
+</script>
+</body>
+</html>
